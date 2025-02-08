@@ -7,7 +7,7 @@ async function scrapeReviews(url) {
     try {
         browser = await puppeteer.launch({
             args: ["--no-sandbox", "--disable-setuid-sandbox"],
-            headless: "new"
+            headless: true
         });
 
         const page = await browser.newPage();
@@ -25,7 +25,10 @@ async function scrapeReviews(url) {
                 const loadMoreButton = await page.$("#rat_more");
                 if (!loadMoreButton) break;
 
-                await Promise.all([loadMoreButton.click(), page.waitForTimeout(2000)]);
+                await Promise.all([
+                    loadMoreButton.click(),
+                    new Promise(resolve => setTimeout(resolve, 2000)) // Replaces page.waitForTimeout(2000)
+                  ]);
             } catch (loadMoreError) {
                 console.log("No more reviews to load or error loading:", loadMoreError);
                 break;

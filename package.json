@@ -11,10 +11,10 @@
     "install": "npm install && npx puppeteer install"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.18.2",
     "mongoose": "^7.0.0",
-    "puppeteer": "^21.0.0",
-    "dotenv": "^16.0.0"
+    "puppeteer": "^24.2.0"
   },
   "engines": {
     "node": "18.x"
